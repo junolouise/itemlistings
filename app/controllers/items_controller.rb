@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   ITEMS_URL = 'https://s3-eu-west-1.amazonaws.com/olio-staging-images/developer/test-articles-v4.json'.freeze
 
-  before_action :set_item, only: %i[show edit update destroy]
+  before_action :set_item, only: %i[show edit update destroy like]
   before_action :fetch_items_and_users, only: :index
 
   # GET /items or /items.json
@@ -58,6 +58,12 @@ class ItemsController < ApplicationController
     end
   end
 
+  def like
+    @item.likes += 1
+    @item.save
+    redirect_to items_path
+  end
+
   private
 
   def fetch_items_and_users
@@ -72,7 +78,6 @@ class ItemsController < ApplicationController
                   thumbnail_url: i['photos'][0].dig('files', 'medium'),
                   distance: i.dig('location', 'distance'),
                   views: i.dig('reactions', 'views'),
-                  likes: 0,
                   external_id: i['id'],
                   user: user)
       user.update(display_picture: user_data.dig('current_avatar', 'small'),

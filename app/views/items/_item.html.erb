@@ -1,4 +1,14 @@
 <article class='item'>
+  <div class='likes'>
+    <%= button_to [:like, item], class: 'like-button' do %>
+      <% if item.likes == 0 %>
+        <%= image_tag('heart-empty-icon') %>
+      <% else %>
+        <%= image_tag('heart-full-icon') %>
+        <% end %>
+    <% end %>
+    <p><%= item.likes %>
+  </div>
   <%= image_tag(item.thumbnail_url) %>
   <div class='item-details'>
     <div class='item-title'>
