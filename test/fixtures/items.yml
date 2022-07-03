@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  thumbnail_url: MyString
+  distance: 1.5
+  views: 1
+  likes: 1
+
+two:
+  title: MyString
+  thumbnail_url: MyString
+  distance: 1.5
+  views: 1
+  likes: 1

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @item.title %>
+</p>
+
+<p>
+  <strong>Thumbnail url:</strong>
+  <%= @item.thumbnail_url %>
+</p>
+
+<p>
+  <strong>Distance:</strong>
+  <%= @item.distance %>
+</p>
+
+<p>
+  <strong>Views:</strong>
+  <%= @item.views %>
+</p>
+
+<p>
+  <strong>Likes:</strong>
+  <%= @item.likes %>
+</p>
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>
