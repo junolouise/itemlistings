@@ -1,3 +1,62 @@
 // Place all the styles related to the Items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+$white: white;
+$grey: #ececec;
+$shadow: 0px 8px 16px $grey;
+
+.items-container {
+  background-color: $white;
+  max-width: 600px;
+  height: 600px;
+  margin: 20px auto;
+  padding: 40px;
+  box-shadow: $shadow;
+  border-radius: 8px;
+}
+
+.item {
+  box-shadow: $shadow;
+  border-radius: 8px;
+  width: 100%;
+  height: 100px;
+  display: flex;
+
+  p {
+    margin: 0;
+  }
+  img {
+    width: 100px;
+    object-fit: cover;
+  }
+
+  .item-details {
+    flex-direction: column;
+    display: flex;
+    padding: 0 12px;
+    flex-grow: 1;
+    justify-content: space-evenly;
+
+    .item-title {
+      display: flex;
+    }
+
+    .user-details {
+      display: flex;
+    }
+
+    .item-distance-views {
+      display: flex;
+
+      .item-detail {
+        display: flex;
+        margin-right: 12px;
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+}

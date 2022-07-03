@@ -67,7 +67,7 @@ class ItemsController < ApplicationController
     response_items.each do |i|
       item = Item.find_or_create_by(external_id: i['id'])
       item.update(title: i['title'],
-                  thumbnail_url: i['photos'][0].dig('files', 'small'),
+                  thumbnail_url: i['photos'][0].dig('files', 'medium'),
                   distance: i.dig('location', 'distance'),
                   views: i.dig('reactions', 'views'),
                   likes: 0,

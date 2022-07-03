@@ -1,0 +1,22 @@
+<article class='item'>
+  <%= image_tag(item.thumbnail_url) %>
+  <div class='item-details'>
+    <div class='item-title'>
+     <h2><%= item.title %></h2>
+    </div>
+    <div class='user-details'>
+      <p>Poppy</p>
+      <p>5.0</p>
+    </div>
+    <div class='item-distance-views'>
+      <div class='item-detail'>
+        <%= image_tag('distance-icon') %>
+        <p><%= item.distance %>mi</p>
+      </div>
+      <div class='item-detail'>
+        <%= image_tag('views-icon') %>
+        <p><%= item.views %></p>
+      </div>
+    </div>
+  </div>
+</article>
