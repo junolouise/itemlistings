@@ -9,10 +9,12 @@
         <%= image_tag(item.user.display_picture) %>
         <p><%= item.user.name %></p>
       </div>
-      <div class='user-rating'>
-       <%= image_tag('rating-icon') %>
-       <p><%= item.user.rating %></p>
-      </div>
+      <% if item.user.rating.present?%>
+        <div class='user-rating'>
+          <%= image_tag('rating-icon') %>
+          <p><%= item.user.rating %></p>
+        </div>
+      <% end %>
     </div>
     <div class='item-distance-views'>
       <div class='item-detail'>
