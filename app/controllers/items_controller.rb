@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   ITEMS_URL = 'https://s3-eu-west-1.amazonaws.com/olio-staging-images/developer/test-articles-v4.json'.freeze
 
   before_action :set_item, only: %i[show edit update destroy]
-  before_action :fetch_items, only: :index
+  before_action :fetch_items_and_users, only: :index
 
   # GET /items or /items.json
   def index
@@ -60,18 +60,24 @@ class ItemsController < ApplicationController
 
   private
 
-  def fetch_items
+  def fetch_items_and_users
     uri = URI(ITEMS_URL)
     response = Net::HTTP.get(uri)
     response_items = JSON.parse(response)
     response_items.each do |i|
       item = Item.find_or_create_by(external_id: i['id'])
+      user_data = i['user']
+      user = User.find_or_create_by(external_id: user_data['id'])
       item.update(title: i['title'],
                   thumbnail_url: i['photos'][0].dig('files', 'medium'),
                   distance: i.dig('location', 'distance'),
                   views: i.dig('reactions', 'views'),
                   likes: 0,
-                  external_id: i['id'])
+                  external_id: i['id'],
+                  user: user)
+      user.update(display_picture: user_data.dig('current_avatar', 'small'),
+                  rating: user_data.dig('rating', 'rating'),
+                  name: user_data['first_name'])
     end
   end
 

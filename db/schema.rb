@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_03_115556) do
+ActiveRecord::Schema.define(version: 2022_07_03_150206) do
 
   create_table "items", force: :cascade do |t|
     t.string "title"
@@ -20,8 +20,20 @@ ActiveRecord::Schema.define(version: 2022_07_03_115556) do
     t.integer "likes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "external_id", null: false
+    t.integer "external_id", null: false
+    t.integer "user_id", null: false
     t.index ["external_id"], name: "index_items_on_external_id"
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "display_picture"
+    t.string "name"
+    t.integer "rating"
+    t.bigint "external_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "items", "users"
 end
