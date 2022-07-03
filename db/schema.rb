@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_03_104118) do
+ActiveRecord::Schema.define(version: 2022_07_03_115556) do
 
   create_table "items", force: :cascade do |t|
     t.string "title"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2022_07_03_104118) do
     t.integer "likes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "external_id", null: false
+    t.index ["external_id"], name: "index_items_on_external_id"
   end
 
 end

@@ -65,11 +65,13 @@ class ItemsController < ApplicationController
     response = Net::HTTP.get(uri)
     response_items = JSON.parse(response)
     response_items.each do |i|
-      Item.create(title: i['title'],
+      item = Item.find_or_create_by(external_id: i['id'])
+      item.update(title: i['title'],
                   thumbnail_url: i['photos'][0].dig('files', 'small'),
                   distance: i.dig('location', 'distance'),
                   views: i.dig('reactions', 'views'),
-                  likes: 0)
+                  likes: 0,
+                  external_id: i['id'])
     end
   end
 
