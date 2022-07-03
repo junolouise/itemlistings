@@ -5,8 +5,14 @@
      <h2><%= item.title %></h2>
     </div>
     <div class='user-details'>
-      <p>Poppy</p>
-      <p>5.0</p>
+      <div class='user-image-name'>
+        <%= image_tag(item.user.display_picture) %>
+        <p><%= item.user.name %></p>
+      </div>
+      <div class='user-rating'>
+       <%= image_tag('rating-icon') %>
+       <p><%= item.user.rating %></p>
+      </div>
     </div>
     <div class='item-distance-views'>
       <div class='item-detail'>
