@@ -30,4 +30,12 @@ class FetchItemsTest < ActionDispatch::IntegrationTest
       assert_not last_user.items.empty?
     end
   end
+
+  test "valid items are displayed despite invalid items" do
+    VCR.use_cassette("items_list_invalid") do
+      get(items_url)
+      assert_equal 10, User.count
+      assert_equal 26, Item.count
+    end
+  end
 end

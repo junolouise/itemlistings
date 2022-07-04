@@ -71,18 +71,18 @@ class ItemsController < ApplicationController
     response = Net::HTTP.get(uri)
     response_items = JSON.parse(response)
     response_items.each do |i|
-      item = Item.find_or_create_by(external_id: i['id'])
+      item = Item.find_or_initialize_by(external_id: i['id'])
       user_data = i['user']
-      user = User.find_or_create_by(external_id: user_data['id'])
+      user = User.find_or_initialize_by(external_id: user_data['id'])
+      user.update(display_picture: user_data.dig('current_avatar', 'small'),
+                  rating: user_data.dig('rating', 'rating'),
+                  name: user_data['first_name'])
       item.update(title: i['title'],
                   thumbnail_url: i['photos'][0].dig('files', 'medium'),
                   distance: i.dig('location', 'distance'),
                   views: i.dig('reactions', 'views'),
                   external_id: i['id'],
                   user: user)
-      user.update(display_picture: user_data.dig('current_avatar', 'small'),
-                  rating: user_data.dig('rating', 'rating'),
-                  name: user_data['first_name'])
     end
   end
 
