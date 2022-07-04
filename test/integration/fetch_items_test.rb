@@ -38,4 +38,13 @@ class FetchItemsTest < ActionDispatch::IntegrationTest
       assert_equal 26, Item.count
     end
   end
+
+  test "item is displayed without views" do
+    item = items(:one)
+    item.update(views: nil)
+    VCR.use_cassette("items_list") do
+      get(items_url)
+      assert_select "h2", item.title
+    end
+  end
 end
