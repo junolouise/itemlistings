@@ -6,7 +6,7 @@ The displayed list of items comes from a JSON file in a S3 bucket. The JSON file
 
 ### Running the app
 1. Firstly, if you don't already have it, install Ruby. Here is a [helpful guide](https://www.ruby-lang.org/en/documentation/installation/) for this.
-2. Download the code for the app if you haven't already.
+2. [Download the code](https://github.com/junolouise/itemlistings) for the app if you haven't already.
 3. Open a terminal and type:
 `gem install bundler`
 4. Change into the app's directory from the terminal using
