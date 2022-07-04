@@ -1,7 +1,7 @@
 require "test_helper"
 
 class FetchItemsTest < ActionDispatch::IntegrationTest
- test "correct values are set when browsing to /items" do
+ test "correct item values are set when browsing to /items" do
     VCR.use_cassette("items_list") do
       get(items_url)
       assert_equal 27, Item.count
@@ -14,6 +14,20 @@ class FetchItemsTest < ActionDispatch::IntegrationTest
       assert_equal nil, last_item.likes
       assert_equal 4259900, last_item.external_id
       assert_not last_item.user.nil?
+    end
+  end
+
+  test "correct user values are set when browsing to /items" do
+    VCR.use_cassette("items_list") do
+      get(items_url)
+      assert_equal 11, User.count
+      last_user = User.last
+      last_user_display_picture = "https://cdn.olioex.com/uploads/avatar/file/VwTGY2skijLppfBIrygvwA/small_image.jpg"
+      assert_equal last_user_display_picture, last_user.display_picture
+      assert_equal "Briony", last_user.name
+      assert_equal 10, last_user.rating
+      assert_equal 701990, last_user.external_id
+      assert_not last_user.items.empty?
     end
   end
 end
