@@ -47,4 +47,13 @@ class FetchItemsTest < ActionDispatch::IntegrationTest
       assert_select "h2", item.title
     end
   end
+
+  test "user is displayed without rating" do
+    user = users(:one)
+    user.update(rating: nil)
+    VCR.use_cassette("items_list") do
+      get(items_url)
+      assert_select "p", user.name
+    end
+  end
 end
