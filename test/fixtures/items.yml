@@ -2,14 +2,18 @@
 
 one:
   title: MyString
-  thumbnail_url: MyString
+  thumbnail_url: heart-full-icon.svg
   distance: 1.5
   views: 1
   likes: 1
+  external_id: 1
+  user: one
 
 two:
   title: MyString
-  thumbnail_url: MyString
+  thumbnail_url: heart-empty-icon.svg
   distance: 1.5
   views: 1
   likes: 1
+  external_id: 2
+  user: two
