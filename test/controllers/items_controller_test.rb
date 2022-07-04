@@ -6,8 +6,10 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get items_url
-    assert_response :success
+    VCR.use_cassette("items_list") do
+      get items_url
+      assert_response :success
+    end
   end
 
   test "should get new" do
@@ -17,7 +19,8 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create item" do
     assert_difference('Item.count') do
-      post items_url, params: { item: { distance: @item.distance, likes: @item.likes, thumbnail_url: @item.thumbnail_url, title: @item.title, views: @item.views } }
+      user = users(:one)
+      post items_url, params: { item: { distance: @item.distance, likes: @item.likes, thumbnail_url: @item.thumbnail_url, title: @item.title, views: @item.views, external_id: @item.external_id, user_id: user.id} }
     end
 
     assert_redirected_to item_url(Item.last)
