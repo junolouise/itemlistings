@@ -18,4 +18,9 @@ class ItemTest < ActiveSupport::TestCase
     item.distance = nil
     assert_not item.valid?
   end
+
+  test "item 'likes' has 0 as default value" do
+    item = Item.new
+    assert_equal 0, item.likes
+  end
 end

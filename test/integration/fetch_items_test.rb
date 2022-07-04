@@ -11,7 +11,7 @@ class FetchItemsTest < ActionDispatch::IntegrationTest
       assert_equal last_item_thumbnail_url, last_item.thumbnail_url
       assert_equal 11.0, last_item.distance
       assert_equal 4, last_item.views
-      assert_equal nil, last_item.likes
+      assert_equal 0, last_item.likes
       assert_equal 4259900, last_item.external_id
       assert_not last_item.user.nil?
     end
